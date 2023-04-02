@@ -41,12 +41,9 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
-    // Метод для создания пользователя в базе данных или в памяти приложения
+    // Метод для создания пользователя в базе данных
     private boolean addUser(String username, String password) {
-        // реализация создания пользователя
         UserDAO userDAO = new UserDAO();
-        User user = new User(username, password, null, null);
-        userDAO.addUser(user);
         return userDAO.executeRegQuery(username, password) != null;
     }
 }
