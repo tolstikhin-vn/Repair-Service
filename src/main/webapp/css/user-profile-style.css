@@ -1,0 +1,43 @@
+.personal-data {
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 400px; /* задаем максимальную ширину блока */
+    margin: 0 0 20px 0; /* задаем отступы сверху, справа, снизу, слева */
+}
+
+.personal-data h2 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.personal-data form {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+    margin-top: 10px;
+}
+
+.personal-data form label {
+    font-weight: bold;
+}
+
+.personal-data form input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.personal-data form input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.personal-data form input[type="submit"]:hover {
+    background-color: #0062cc;
+}

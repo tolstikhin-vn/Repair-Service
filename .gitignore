@@ -1,0 +1,28 @@
+# Исключаем папку сборки проекта Maven
+/target/
+
+# Игнорируем сгенерированные файлы IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+*.log
+
+# Игнорируем лог-файлы
+*.log
+logs/
+*.txt
+
+# Игнорируем скомпилированные файлы Java
+*.class
+
+# Игнорируем временные файлы
+*.tmp
+
+# Игнорируем файлы конфигурации, которые могут содержать пароли или ключи
+application.properties
+application.yml
+application-dev.properties
+application-dev.yml
+application-prod.properties
+application-prod.yml
