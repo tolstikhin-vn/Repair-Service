@@ -15,6 +15,11 @@ import ru.tolstikhin.entity.User;
 import java.io.IOException;
 @WebServlet("/registration")
 public class RegisterServlet extends HttpServlet {
+    private UserDAO userDAO; // экземпляр класса для работы с БД
+
+    public void init() {
+        userDAO = new UserDAO(); // создаем экземпляр при запуске сервлета
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,7 +48,6 @@ public class RegisterServlet extends HttpServlet {
 
     // Метод для создания пользователя в базе данных
     private boolean addUser(String username, String password) {
-        UserDAO userDAO = new UserDAO();
         return userDAO.executeRegQuery(username, password) != null;
     }
 }

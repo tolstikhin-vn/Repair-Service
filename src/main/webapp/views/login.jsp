@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Login Page</title>
+  <title>Авторизация</title>
   <link rel="stylesheet" href="/css/main-style.css">
 </head>
 <body>

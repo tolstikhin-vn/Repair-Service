@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Profile Page</title>
+    <title>Личный кабинет</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/main-style.css">
     <link rel="stylesheet" href="/css/user-profile-style.css">

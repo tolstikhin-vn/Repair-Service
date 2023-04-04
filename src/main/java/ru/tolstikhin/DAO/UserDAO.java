@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
+import java.util.LinkedList;
 
 public class UserDAO {
 
@@ -28,6 +30,45 @@ public class UserDAO {
     private final String GET_ID_BY_LOGIN = "SELECT u.id FROM users AS u WHERE u.login = ?";
 
     private final String GET_USER_DATA = "SELECT u.name, u.surname FROM users AS u WHERE u.login = ?";
+
+    private final String GET_USERS = "SELECT * FROM get_users()";
+
+    public LinkedList<User> getUsers() {
+        LinkedList<User> users = new LinkedList<>();
+        SQLController sqlController = new SQLController();
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            try {
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery("SELECT * FROM users");
+//                PreparedStatement pstmt = connection.prepareStatement(GET_USERS);
+//                ResultSet rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+                    User user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setLogin(rs.getString("login"));
+                    user.setName(rs.getString("name"));
+                    user.setSurname(rs.getString("surname"));
+                    // добавление пользователя в список
+                    users.add(user);
+                }
+                statement.close();
+                rs.close();
+                connection.close();
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+            }
+        }
+
+        for (User user : users) {
+            System.out.println(user);
+            System.out.println(user.getId() + " " + user.getLogin() + " " + user.getName() + " " + user.getFam());
+        }
+
+        return users;
+    }
 
     public ResultSet executeRegQuery(String log, String pass) {
         SQLController sqlController = new SQLController();

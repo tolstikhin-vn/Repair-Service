@@ -15,9 +15,7 @@ public class AdminProfileServlet extends HttpServlet {
             // Если пользователь не аутентифицирован, перенаправляем его на страницу входа
             response.sendRedirect(request.getContextPath() + "/login");
         } else {
-            System.out.println(session.getAttribute("user"));
-            // Если пользователь аутентифицирован, показываем страницу профиля
-            request.getRequestDispatcher("/views/admin-profile.jsp").forward(request, response);
+            request.getRequestDispatcher("/users-list").forward(request, response);
         }
     }
 

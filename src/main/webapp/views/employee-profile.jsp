@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AJAX Example</title>
+    <title>Личный кабинет</title>
     <script>
         function loadPage(url) {
             var xhr = new XMLHttpRequest();

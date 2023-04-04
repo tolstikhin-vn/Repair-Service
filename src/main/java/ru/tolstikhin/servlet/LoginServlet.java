@@ -19,6 +19,12 @@ import java.sql.SQLException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+    private UserDAO userDAO; // экземпляр класса для работы с БД
+
+    public void init() {
+        userDAO = new UserDAO(); // создаем экземпляр при запуске сервлета
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -72,12 +78,10 @@ public class LoginServlet extends HttpServlet {
     }
 
     private boolean isUserLogIn(String username, String password) {
-        UserDAO userDAO = new UserDAO();
         return userDAO.logIn(username, password);
     }
 
     private void switchRole(String login, HttpServletResponse response) throws IOException {
-        UserDAO userDAO = new UserDAO();
         System.out.println((userDAO.getMainUserRole(login)));
         switch (userDAO.getMainUserRole(login)) {
             case "Администратор":
