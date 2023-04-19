@@ -1,0 +1,55 @@
+/* Стили для основного содержимого */
+
+main {
+    padding: 20px;
+}
+
+.service-center {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.service-center h3 {
+    margin-top: 0;
+}
+
+.service-center ul {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.service-center ul li {
+    margin-bottom: 10px;
+}
+
+.service-center ul:last-of-type {
+    margin-bottom: 20px;
+}
+
+.service-center ul:last-of-type li:last-of-type {
+    margin-bottom: 0;
+}
+
+.service-center ul li::before {
+    content: "• ";
+    color: #FF585D;
+}
+
+.service-center ul li span {
+    color: #999;
+}
+
+.service-center ul li a {
+    color: #666;
+}
+
+.service-center ul li a:hover {
+    text-decoration: underline;
+}
+
+.service-center:last-of-type {
+    margin-bottom: 0;
+}

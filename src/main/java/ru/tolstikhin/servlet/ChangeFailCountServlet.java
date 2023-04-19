@@ -5,20 +5,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import ru.tolstikhin.DAO.UserDAO;
 
 import java.io.IOException;
 
-@WebServlet(name = "logOutServlet", urlPatterns = {"/logout"})
-public class LogOutServlet extends HttpServlet {
+@WebServlet(name = "ChangeFailCountServlet", value = "/change-fail-count")
+public class ChangeFailCountServlet extends HttpServlet {
+
+    private UserDAO userDAO; // экземпляр класса для работы с БД
+
+    public void init() {
+        userDAO = new UserDAO(); // создаем экземпляр при запуске сервлета
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.removeAttribute("user");
-            session.invalidate();
-        }
-        response.sendRedirect("/"); //путь к главной странице приложения
+
     }
 
     @Override

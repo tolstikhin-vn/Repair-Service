@@ -1,0 +1,174 @@
+.entry-content {
+    max-width: 75%;
+    margin: 0 auto;
+}
+
+.wp-block-columns.mg-b-0 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wp-block-column.image-top img {
+    width: 364px;
+    height: 300px;
+}
+
+.wp-block-column.text-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wp-block-column.top-2-futers {
+    flex-basis: 50%;
+    text-align: center;
+}
+
+.wp-block-columns.has-2-columns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-phone {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.nomer {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.phone-page {
+    color: #333;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.arrow-phone img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.blocks-top {
+    display: flex;
+    align-items: center;
+}
+
+.img-futures-top {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.txt-futures-top {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.txt-19px {
+    font-size: 19px;
+}
+
+.zirka {
+    color: #d20c0c;
+    font-size: 24px;
+}
+
+.mg-b-0 {
+    margin-bottom: 0px;
+}
+
+.mg-b-0 {
+    margin-bottom: 0px !important;
+}
+
+.mg-t--15 {
+    margin-top: -15px;
+}
+
+.wp-block-column {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.wp-block-column {
+    flex-grow: 1;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.blocks-top {
+    border-left-color: #43b02a !important;
+    border-left-style: solid !important;
+    border-right-color: #43b02a !important;
+    border-right-style: solid !important;
+    border-top-color: #43b02a !important;
+    border-top-style: solid !important;
+    border-bottom-color: #43b02a !important;
+    border-bottom-style: solid !important;
+    border: 1px;
+    padding-top: 15px;
+    padding-left: 15px;
+    border-radius: 5px !important;
+    padding-bottom: 15px;
+}
+
+.price-list span {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.price-list {
+    width: 100%;
+    margin: auto;
+}
+
+.price-list {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.row-top {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.service-name {
+    flex-grow: 1;
+}
+
+.service-price,
+.service-terms {
+    width: 100px;
+    text-align: center;
+}
+
+.price-item {
+    margin-bottom: 5px;
+    display: flex;
+    margin-top: 10px;
+    border: 1px solid green;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.service-name,
+.service-price,
+.service-terms {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+
+

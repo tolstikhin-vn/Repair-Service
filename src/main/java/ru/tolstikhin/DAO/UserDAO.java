@@ -19,6 +19,8 @@ public class UserDAO {
     private static Logger logger = LoggerFactory.getLogger(UserDAO.class);
     private Connection connection;
 
+    private SQLController sqlController = new SQLController();
+
     private final String SIGN_UP_QUERY = "select new_user(?, ?, NULL, NULL, NULL, NULL, NULL, NULL)";
 
     private final String LOG_IN_QUERY = "{? = call user_login(?, ?)}";
@@ -31,19 +33,30 @@ public class UserDAO {
 
     private final String GET_USER_DATA = "SELECT u.name, u.surname FROM users AS u WHERE u.login = ?";
 
-    private final String GET_USERS = "SELECT * FROM get_users()";
+    private final String GET_USERS = "SELECT * FROM users ORDER BY users.id DESC";
+
+    private final String GET_USER_ALL_DATA = "SELECT * FROM users WHERE users.id = ?";
+    private final String CHANGE_PASSWORD = "SELECT change_password(?, ?)";
+
+    private final String ADMIN_USER_BAN = "SELECT admin_user_ban(?)";
+
+    private final String ADMIN_USER_UNBAN = "SELECT admin_user_unban(?)";
+    private final String USER_SOFT_DEL = "SELECT admin_user_soft_del(?)";
+    private final String USER_RESTORE_SOFT_DEL = "SELECT admin_user_restore_soft_del(?)";
+
+    private final String USER_HARD_DEL = "SELECT admin_user_hard_del(?)";
+
+    private final String ADMIN_SET_PASSWORD_FAIL_COUNT_RESET = "SELECT admin_set_password_fail_count_reset(?)";
 
     public LinkedList<User> getUsers() {
         LinkedList<User> users = new LinkedList<>();
-        SQLController sqlController = new SQLController();
+//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
             try {
                 Statement statement = connection.createStatement();
-                ResultSet rs = statement.executeQuery("SELECT * FROM users");
-//                PreparedStatement pstmt = connection.prepareStatement(GET_USERS);
-//                ResultSet rs = pstmt.executeQuery();
+                ResultSet rs = statement.executeQuery(GET_USERS);
 
                 while (rs.next()) {
                     User user = new User();
@@ -64,14 +77,14 @@ public class UserDAO {
 
         for (User user : users) {
             System.out.println(user);
-            System.out.println(user.getId() + " " + user.getLogin() + " " + user.getName() + " " + user.getFam());
+            System.out.println(user.getId() + " " + user.getLogin() + " " + user.getName() + " " + user.getSurname());
         }
 
         return users;
     }
 
     public ResultSet executeRegQuery(String log, String pass) {
-        SQLController sqlController = new SQLController();
+//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -84,6 +97,7 @@ public class UserDAO {
                 connection.close();
                 return rs;
             } catch (SQLException e) {
+                System.out.println("тут");
                 logger.error(e.getMessage());
             }
         }
@@ -91,7 +105,7 @@ public class UserDAO {
     }
 
     private int getIdByLogin(String login) throws SQLException {
-        SQLController sqlController = new SQLController();
+//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -113,11 +127,11 @@ public class UserDAO {
         if (!name.isBlank()) {
             user.setName(name);
             if (!surname.isBlank()) {
-                user.setFam(surname);
+                user.setSurname(surname);
             }
         }
 
-        SQLController sqlController = new SQLController();
+//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
 
@@ -143,8 +157,42 @@ public class UserDAO {
         return false;
     }
 
+    public User getUserById(int userId) {
+//        SQLController sqlController = new SQLController();
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            try {
+                PreparedStatement statement = connection.prepareStatement(GET_USER_ALL_DATA);
+                statement.setInt(1, userId);
+                ResultSet resultSet = statement.executeQuery();
+                return resultSetToUser(resultSet);
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    public User resultSetToUser(ResultSet rs) throws SQLException {
+        User user = new User();
+        if (rs.next()) {
+            user.setId(rs.getInt("id"));
+            user.setLogin(rs.getString("login"));
+            user.setName(rs.getString("name"));
+            user.setSurname(rs.getString("surname"));
+            user.setActive(rs.getBoolean("active"));
+            user.setDeleted(rs.getBoolean("deleted"));
+            user.setPasswordFailCount(rs.getInt("password_fail_count"));
+            user.setDefaultPasswordFailCount(rs.getInt("default_password_fail_count"));
+            user.setLastLogin(rs.getString("last_login"));
+            user.setLastLogout(rs.getString("last_logout"));
+        }
+        return user;
+    }
+
     public ResultSet getUserData(String login) {
-        SQLController sqlController = new SQLController();
+//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -160,7 +208,7 @@ public class UserDAO {
     }
 
     public String getMainUserRole(String login) {
-        SQLController sqlController = new SQLController();
+//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -179,7 +227,7 @@ public class UserDAO {
 
 
     public boolean logIn(String log, String pass) {
-        SQLController sqlController = new SQLController();
+//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         try {
@@ -196,5 +244,127 @@ public class UserDAO {
         }
         return false;
     }
-}
 
+    public boolean changePassword(int userId, String newPassword) throws SQLException {
+//        SQLController sqlController = new SQLController();
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(CHANGE_PASSWORD);
+            statement.setInt(1, userId);
+            statement.setString(2, newPassword);
+            ResultSet resultSet = statement.executeQuery();
+            boolean passwordChanged = false;
+            if (resultSet.next()) {
+                passwordChanged = resultSet.getBoolean(1);
+            }
+            statement.close();
+            return passwordChanged;
+        }
+        return false;
+    }
+
+    public boolean userBan(int userId) throws SQLException {
+//        SQLController sqlController = new SQLController();
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(ADMIN_USER_BAN);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            boolean userBanned = false;
+            if (resultSet.next()) {
+                userBanned = resultSet.getBoolean(1);
+            }
+            statement.close();
+            return userBanned;
+        }
+        return false;
+    }
+
+    public boolean userUnban(int userId) throws SQLException {
+//        SQLController sqlController = new SQLController();
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(ADMIN_USER_UNBAN);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            boolean userUnbanned = false;
+            if (resultSet.next()) {
+                userUnbanned = resultSet.getBoolean(1);
+            }
+            statement.close();
+            return userUnbanned;
+        }
+        return false;
+    }
+
+    public boolean userSoftDel(int userId) throws SQLException {
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(USER_SOFT_DEL);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            boolean userSoftDeleted = false;
+            if (resultSet.next()) {
+                userSoftDeleted = resultSet.getBoolean(1);
+            }
+            statement.close();
+            return userSoftDeleted;
+        }
+        return false;
+    }
+
+    public boolean userRestoreSoftDel(int userId) throws SQLException {
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(USER_RESTORE_SOFT_DEL);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            boolean userRestoreSoftDeleted = false;
+            if (resultSet.next()) {
+                userRestoreSoftDeleted = resultSet.getBoolean(1);
+            }
+            statement.close();
+            return userRestoreSoftDeleted;
+        }
+        return false;
+    }
+
+    public boolean userHardDel(int userId) throws SQLException {
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(USER_HARD_DEL);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            boolean userHardDeleted = false;
+            if (resultSet.next()) {
+                userHardDeleted = resultSet.getBoolean(1);
+            }
+            statement.close();
+            return userHardDeleted;
+        }
+        return false;
+    }
+
+    public boolean setPassFailCountReset(int userId) throws SQLException {
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(ADMIN_SET_PASSWORD_FAIL_COUNT_RESET);
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            boolean userHardDeleted = false;
+            if (resultSet.next()) {
+                userHardDeleted = resultSet.getBoolean(1);
+            }
+            statement.close();
+            return userHardDeleted;
+        }
+        return false;
+    }
+}

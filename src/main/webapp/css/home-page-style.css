@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    justify-content: center; /* Размещаем элементы по центру горизонтали */
+    align-items: center; /* Размещаем элементы по центру вертикали */
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.item {
+    position: relative;
+    width: calc(33.33% - 20px); /* Ширина элемента с учетом отступов */
+    margin: 10px; /* Отступы между элементами */
+    text-align: center;
+}
+
+.item img {
+    max-width: 100%; /* Уменьшаем размер изображения до максимально возможного размера элемента */
+}
