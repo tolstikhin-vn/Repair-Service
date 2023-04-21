@@ -12,7 +12,7 @@
 <header>
     <nav>
         <ul>
-            <li><a href="track-repairs">Узнать статус ремонта</a></li>
+            <li><a href="repair-status">Узнать статус ремонта</a></li>
             <li><a href="about">О нас</a></li>
             <li><a href="addresses">Адреса и контакты</a></li>
         </ul>
@@ -22,7 +22,7 @@
                 if (address == null) {
                     address = "Выберите сервисный центр";
                 }
-                %>
+            %>
             <p id="address" onclick="showDropdown()">
                 <%= address %>
             </p>
@@ -40,8 +40,6 @@
             <div class="wp-block-column image-top"><img class="img-page lazyloaded"
                                                         src="/images/services/remont-telephone.jpg"
                                                         alt="Ремонт телефонов" data-ll-status="loaded">
-                <noscript><img class="img-page" src="/images/services/remont-telephone.jpg"
-                               alt="Ремонт телефонов"></noscript>
             </div>
             <div class="wp-block-column text-top">
                 <div class="wp-block-columns mg-b-0">
@@ -50,45 +48,38 @@
                             src="/images/services/watch.png"
                             alt="Время ремонта"
                             data-ll-status="loaded">
-                        <noscript><img class="img-futures-top" src="/images/services/watch.png" alt="Время ремонта">
-                        </noscript>
                         <span class="txt-futures-top">Время ремонта<br><strong>от <span
-                                class="txt-19px">20</span> <i>мин</i></strong></span></p> </div>
+                                class="txt-19px">20</span> <i>мин</i></strong></span></p></div>
                     <div class="wp-block-column top-2-futers"><p class="blocks-top"><img
                             class="img-futures-top lazyloaded"
                             src="/images/services/wallet.png"
                             alt="Стоимость ремонта"
                             data-ll-status="loaded">
-                        <noscript><img class="img-futures-top" src="/images/services/wallet.png"
-                                       alt="Стоимость ремонта"></noscript>
                         <span class="txt-futures-top">Стоимость ремонта<br><strong>от <span class="txt-19px;">690</span> <i>руб</i></strong><span
-                                class="zirka">*</span></span></p> </div>
+                                class="zirka">*</span></span></p></div>
                 </div>
                 <p>Бесплатно проведем диагностику смартфона, точно определим причину поломки, подберем фирменную деталь,
                     сообщим стоимость восстановительных работ и срочно выполним качественный ремонт телефона в Москве, и
                     предоставим фирменную гарантию! </p>
             </div>
         </div>
-        <div class="wp-block-columns mg-b-0 mg-t--15"><!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:html --> <p class="blocks-top"><img class="img-futures-top lazyloaded"
-                                                                                     src="/images/services/garantiya.png"
-                                                                                     alt="Гарантия на ремонт"
-                                                                                     data-ll-status="loaded">
-                <span class="txt-futures-top">Фирменная<br>гарантия</span></p> <!-- /wp:html --></div>
-            <!-- /wp:column --> <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:html --> <p class="blocks-top"><img class="img-futures-top lazyloaded"
+        <div class="wp-block-columns mg-b-0 mg-t--15">
+            <div class="wp-block-column"><p class="blocks-top"><img class="img-futures-top lazyloaded"
+                                                                    src="/images/services/garantiya.png"
+                                                                    alt="Гарантия на ремонт"
+                                                                    data-ll-status="loaded">
+                <span class="txt-futures-top">Фирменная<br>гарантия</span></p></div>
+            <div class="wp-block-column"><p class="blocks-top"><img class="img-futures-top lazyloaded"
                                                                                      src="/images/services/original-zapchasty.png"
                                                                                      alt="Оригинальные запчасти"
                                                                                      data-ll-status="loaded">
-                <span class="txt-futures-top">Брендовые<br> запчасти</span></p> <!-- /wp:html --></div>
-            <!-- /wp:column --> <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:html --> <p class="blocks-top"><img class="img-futures-top lazyloaded"
+                <span class="txt-futures-top">Брендовые<br> запчасти</span></p></div>
+            <div class="wp-block-column"><p class="blocks-top"><img class="img-futures-top lazyloaded"
                                                                                      src="/images/services/diagnostick.png"
                                                                                      alt="Бесплатная диагностика"
                                                                                      data-ll-status="loaded">
-                <span class="txt-futures-top">Бесплатная<br> диагностика</span></p> <!-- /wp:html --></div>
-            <!-- /wp:column --> <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:html --> <p class="blocks-top"><img class="img-futures-top lazyloaded"
+                <span class="txt-futures-top">Бесплатная<br> диагностика</span></p></div>
+            <div class="wp-block-column"><p class="blocks-top"><img class="img-futures-top lazyloaded"
                                                                                      src="/images/services/team.png"
                                                                                      alt="Опытные мастера"
                                                                                      data-ll-status="loaded">
@@ -111,7 +102,7 @@
             </div>
             <% LinkedList<PriceList> priceLists = (LinkedList<PriceList>) request.getAttribute("priceLists");
                 if (priceLists != null) {
-                for (PriceList priceList : priceLists) { %>
+                    for (PriceList priceList : priceLists) { %>
             <div class="price-item">
                 <div class="service-name"><%= priceList.getName() %>
                 </div>
@@ -125,7 +116,8 @@
                 <div class="service-terms">от <%= priceList.getTerms() %>
                 </div>
             </div>
-            <% } }%>
+            <% }
+            }%>
         </div>
 
     </div>

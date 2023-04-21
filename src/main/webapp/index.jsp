@@ -13,23 +13,10 @@
 <header>
     <nav>
         <ul>
-            <li><a href="services">Узнать статус ремонта</a></li>
+            <li><a href="repair-status">Узнать статус ремонта</a></li>
             <li><a href="about">О нас</a></li>
             <li><a href="addresses">Адреса и контакты</a></li>
         </ul>
-<%--        <span class="dropdown">--%>
-<%--            <%--%>
-<%--                String address = (String) session.getAttribute("selectedAddress");--%>
-<%--                if (address == null) {--%>
-<%--                    address = "Выберите сервисный центр";--%>
-<%--                }--%>
-<%--            %>--%>
-<%--            <p id="address" onclick="showDropdown()">--%>
-<%--                <%= address %>--%>
-<%--            </p>--%>
-<%--            <ul id="dropdown-content">--%>
-<%--            </ul>--%>
-<%--        </span>--%>
     </nav>
     <div id="login">
         <a href="login">Профиль</a>

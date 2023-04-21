@@ -8,7 +8,7 @@
 <header>
     <nav>
         <ul>
-            <li><a href="track-repairs">Узнать статус ремонта</a></li>
+            <li><a href="repair-status">Узнать статус ремонта</a></li>
             <li><a href="about">О компании</a></li>
             <li><a href="addresses">Адреса и контакты</a></li>
         </ul>

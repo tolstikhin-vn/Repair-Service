@@ -12,7 +12,7 @@
 <header>
     <nav>
         <ul>
-            <li><a href="track-repairs">Узнать статус ремонта</a></li>
+            <li><a href="repair-status">Узнать статус ремонта</a></li>
             <li><a href="about">О нас</a></li>
             <li><a href="addresses">Адреса и контакты</a></li>
         </ul>
@@ -63,26 +63,23 @@
                     предоставим фирменную гарантию!</p>
             </div>
         </div>
-        <div class="wp-block-columns mg-b-0 mg-t--15"><!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:html --> <p class="blocks-top"><img class="img-futures-top lazyloaded"
+        <div class="wp-block-columns mg-b-0 mg-t--15">
+            <div class="wp-block-column"><p class="blocks-top"><img class="img-futures-top lazyloaded"
                                                                                      src="/images/services/garantiya.png"
                                                                                      alt="Гарантия на ремонт"
                                                                                      data-ll-status="loaded">
-                <span class="txt-futures-top">Фирменная<br>гарантия</span></p> <!-- /wp:html --></div>
-            <!-- /wp:column --> <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:html --> <p class="blocks-top"><img class="img-futures-top lazyloaded"
+                <span class="txt-futures-top">Фирменная<br>гарантия</span></p></div>
+            <div class="wp-block-column"><p class="blocks-top"><img class="img-futures-top lazyloaded"
                                                                                      src="/images/services/original-zapchasty.png"
                                                                                      alt="Оригинальные запчасти"
                                                                                      data-ll-status="loaded">
-                <span class="txt-futures-top">Брендовые<br> запчасти</span></p> <!-- /wp:html --></div>
-            <!-- /wp:column --> <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:html --> <p class="blocks-top"><img class="img-futures-top lazyloaded"
+                <span class="txt-futures-top">Брендовые<br> запчасти</span></p></div>
+            <div class="wp-block-column"><p class="blocks-top"><img class="img-futures-top lazyloaded"
                                                                                      src="/images/services/diagnostick.png"
                                                                                      alt="Бесплатная диагностика"
                                                                                      data-ll-status="loaded">
-                <span class="txt-futures-top">Бесплатная<br> диагностика</span></p> <!-- /wp:html --></div>
-            <!-- /wp:column --> <!-- wp:column -->
-            <div class="wp-block-column"><!-- wp:html --> <p class="blocks-top"><img class="img-futures-top lazyloaded"
+                <span class="txt-futures-top">Бесплатная<br> диагностика</span></p></div>
+            <div class="wp-block-column"><p class="blocks-top"><img class="img-futures-top lazyloaded"
                                                                                      src="/images/services/team.png"
                                                                                      alt="Опытные мастера"
                                                                                      data-ll-status="loaded">
