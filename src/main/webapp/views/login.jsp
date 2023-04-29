@@ -8,12 +8,19 @@
 </head>
 <body>
 <header>
-    <%--  <a href="/">--%>
-    <%--  </a>--%>
     <nav>
+        <a href="/">
+            <div class="site-logotype">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="48px">
+                    <rect x="2" y="2" width="26" height="44" rx="2" fill="none" stroke="black" stroke-width="4"/>
+                    <rect x="3" y="3" width="24" height="42" rx="2" fill="#ccc" stroke="none"/>
+                    <circle cx="14.5" cy="41" r="2" fill="black"/>
+                </svg>
+            </div>
+        </a>
         <ul>
             <li><a href="repair-status">Узнать статус ремонта</a></li>
-            <li><a href="about">О компании</a></li>
+            <li><a href="about">О нас</a></li>
             <li><a href="addresses">Адреса и контакты</a></li>
         </ul>
     </nav>
@@ -21,15 +28,22 @@
         <a href="login">Профиль</a>
     </div>
 </header>
-<h1>Login</h1>
-<form action="login" method="post">
-    <label for="username">Логин:</label>
-    <input type="text" id="username" name="username" required><br>
-    <label for="password">Пароль:</label>
-    <input type="password" id="password" name="password" required><br>
-    <input type="submit" value="Login">
-</form>
-<p>Не зарегистрированы? <a href="registration">Зарегистрироваться</a></p>
-<p>Забыли пароль? <a href="restore-password">Восстановить пароль</a></p>
+<main>
+    <h1>Login</h1>
+    <form action="login" method="post">
+        <label for="username">Логин:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required><br>
+        <input type="submit" value="Login">
+    </form>
+    <p>Не зарегистрированы? <a href="registration">Зарегистрироваться</a></p>
+    <p>Забыли пароль? <a href="restore-password">Восстановить пароль</a></p>
+</main>
+<footer>
+    <div id="footer">
+        <p>&copy; 2023 "ЭЛЕКТРОНИКУС"</p>
+    </div>
+</footer>
 </body>
 </html>

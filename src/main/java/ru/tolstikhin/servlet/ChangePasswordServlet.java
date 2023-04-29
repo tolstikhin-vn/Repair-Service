@@ -38,7 +38,6 @@ public class ChangePasswordServlet extends HttpServlet {
 //                request.getRequestDispatcher("/views/admin-profile.jsp").forward(request, response);
             } else {
                 response.sendRedirect( "/admin");
-//                request.getRequestDispatcher("/views/admin-profile.jsp").forward(request, response);
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());

@@ -1,26 +1,40 @@
 package ru.tolstikhin.entity;
 
+import java.time.LocalDateTime;
+
 public class RepairOrder {
 
     private int id;
     private String orderNumber;
     private int serviceCenterId;
-    private int deviceId;
+    private String deviceType;
+
+    private String deviceName;
     private String descriptionProblem;
     private String clientPhoneNumber;
     private boolean completed;
 
+    private int calculationId;
+
+    private int warranty;
+
+    private boolean rated;
+
+    private LocalDateTime startDatetime;
+
     public RepairOrder() {
     }
 
-    public RepairOrder(int id, String orderNumber, int serviceCenterId, int deviceId, String descriptionProblem, String clientPhoneNumber, boolean completed) {
+    public RepairOrder(int id, String orderNumber, int serviceCenterId, int deviceId, String descriptionProblem, String clientPhoneNumber, boolean completed, int calculationId, int warranty, boolean rated) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.serviceCenterId = serviceCenterId;
-        this.deviceId = deviceId;
         this.descriptionProblem = descriptionProblem;
         this.clientPhoneNumber = clientPhoneNumber;
         this.completed = completed;
+        this.calculationId = calculationId;
+        this.warranty = warranty;
+        this.rated = rated;
     }
 
     public int getId() {
@@ -47,12 +61,12 @@ public class RepairOrder {
         this.serviceCenterId = serviceCenterId;
     }
 
-    public int getDeviceId() {
-        return deviceId;
+    public String getDeviceType() {
+        return deviceType;
     }
 
-    public void setDeviceId(int deviceId) {
-        this.deviceId = deviceId;
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
     }
 
     public String getDescriptionProblem() {
@@ -77,5 +91,45 @@ public class RepairOrder {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public boolean isRated() {
+        return rated;
+    }
+
+    public void setRated(boolean rated) {
+        this.rated = rated;
+    }
+
+    public int getCalculationId() {
+        return calculationId;
+    }
+
+    public void setCalculationId(int calculationId) {
+        this.calculationId = calculationId;
+    }
+
+    public int getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(int warranty) {
+        this.warranty = warranty;
+    }
+
+    public LocalDateTime getStartDatetime() {
+        return startDatetime;
+    }
+
+    public void setStartDatetime(LocalDateTime startDatetime) {
+        this.startDatetime = startDatetime;
+    }
+
+    public String getDeviceName() {
+        return deviceName;
+    }
+
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
     }
 }

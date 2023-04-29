@@ -20,22 +20,40 @@ ul {
 /* Стили для шапки страницы */
 
 header {
+    height: 50px;
     display: flex;
+    position: relative; /* добавить свойство position */
     justify-content: space-between;
     align-items: center;
     background-color: #f5f5f5;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.site-logotype {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*margin-right: 10px; !* добавить отступ для разделения соседних элементов *!*/
+}
+
+.site-logotype:hover {
+    cursor: pointer;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /*flex: 1; !* добавить свойство flex *!*/
 }
 
 nav ul {
     display: flex;
+    /*flex: 1;*/
 }
 
 nav li {
@@ -66,6 +84,7 @@ nav li {
     padding: 12px 16px;
     cursor: pointer;
 }
+
 .dropdown li {
     width: 150px;
 }
@@ -89,17 +108,13 @@ ul#dropdown-content li {
     cursor: pointer;
 }
 
-/* Стили для основного содержимого */
-
-/*main {*/
-/*    padding: 20px;*/
-/*}*/
-
-/* Стили для подвала страницы */
-
-/*footer {*/
-/*    background-color: #f5f5f5;*/
-/*    padding: 10px;*/
-/*    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);*/
-/*}*/
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
 

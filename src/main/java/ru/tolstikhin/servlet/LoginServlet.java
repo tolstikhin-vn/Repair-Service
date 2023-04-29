@@ -50,14 +50,18 @@ public class LoginServlet extends HttpServlet {
             ResultSet resultSet = userDAO.getUserData(username);
             if (resultSet != null) {
                 try {
+                    int userId = 0;
                     String surname = null;
                     String name = null;
+                    int userRoleId = 0;
                     while (resultSet.next()) {
-                        surname = resultSet.getString("surname");
+                        userId = resultSet.getInt("id");
                         name = resultSet.getString("name");
+                        surname = resultSet.getString("surname");
+                        userRoleId = resultSet.getInt("id_role");
                     }
                     // Создаем объект типа User
-                    user = new User(username, password, surname, name);
+                    user = new User(userId, username, password, surname, name, userRoleId);
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }

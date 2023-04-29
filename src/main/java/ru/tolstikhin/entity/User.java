@@ -14,11 +14,15 @@ public class User {
     private String lastLogin;
     private String lastLogout;
 
-    public User(String login, String password, String surname, String name) {
+    private int userRoleId;
+
+    public User(int id, String login, String password, String surname, String name, int userRoleId) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.surname = surname;
         this.name = name;
+        this.userRoleId = userRoleId;
     }
 
     public User(int id, String login, String password, String surname, String name, boolean active, boolean deleted, int passwordFailCount, int defaultPasswordFailCount, String lastLogin, String lastLogout) {
@@ -125,5 +129,13 @@ public class User {
 
     public void setLastLogout(String lastLogout) {
         this.lastLogout = lastLogout;
+    }
+
+    public int getUserRoleId() {
+        return userRoleId;
+    }
+
+    public void setUserRoleId(int userRoleId) {
+        this.userRoleId = userRoleId;
     }
 }

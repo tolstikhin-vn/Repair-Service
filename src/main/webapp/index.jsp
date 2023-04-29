@@ -12,6 +12,15 @@
 
 <header>
     <nav>
+        <a href="/">
+            <div class="site-logotype">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="48px">
+                    <rect x="2" y="2" width="26" height="44" rx="2" fill="none" stroke="black" stroke-width="4"/>
+                    <rect x="3" y="3" width="24" height="42" rx="2" fill="#ccc" stroke="none"/>
+                    <circle cx="14.5" cy="41" r="2" fill="black"/>
+                </svg>
+            </div>
+        </a>
         <ul>
             <li><a href="repair-status">Узнать статус ремонта</a></li>
             <li><a href="about">О нас</a></li>
@@ -48,9 +57,10 @@
 
     </div>
 </main>
-
-<%--<footer>--%>
-<!-- Футер страницы -->
-<%--</footer>--%>
+<footer>
+    <div id="footer">
+        <p>&copy; 2023 "ЭЛЕКТРОНИКУС"</p>
+    </div>
+</footer>
 </body>
 </html>

@@ -31,7 +31,8 @@ public class UserDAO {
 
     private final String GET_ID_BY_LOGIN = "SELECT u.id FROM users AS u WHERE u.login = ?";
 
-    private final String GET_USER_DATA = "SELECT u.name, u.surname FROM users AS u WHERE u.login = ?";
+    private final String GET_USER_DATA = "SELECT u.id, u.name, u.surname, ur.id_role FROM users AS u " +
+            "INNER JOIN users_role_link AS ur ON ur.id_user = u.id WHERE u.login = ?";
 
     private final String GET_USERS = "SELECT * FROM users ORDER BY users.id DESC";
 
@@ -47,6 +48,8 @@ public class UserDAO {
     private final String USER_HARD_DEL = "SELECT admin_user_hard_del(?)";
 
     private final String ADMIN_SET_PASSWORD_FAIL_COUNT_RESET = "SELECT admin_set_password_fail_count_reset(?)";
+
+    private final String INSERT_USER_ORDER_LINK = "INSERT INTO users_orders_link (user_id, order_id) VALUES (?,?)";
 
     public LinkedList<User> getUsers() {
         LinkedList<User> users = new LinkedList<>();
@@ -64,6 +67,7 @@ public class UserDAO {
                     user.setLogin(rs.getString("login"));
                     user.setName(rs.getString("name"));
                     user.setSurname(rs.getString("surname"));
+                    user.setUserRoleId(rs.getInt("id_role"));
                     // добавление пользователя в список
                     users.add(user);
                 }
@@ -74,12 +78,6 @@ public class UserDAO {
                 logger.error(e.getMessage());
             }
         }
-
-        for (User user : users) {
-            System.out.println(user);
-            System.out.println(user.getId() + " " + user.getLogin() + " " + user.getName() + " " + user.getSurname());
-        }
-
         return users;
     }
 
@@ -97,7 +95,6 @@ public class UserDAO {
                 connection.close();
                 return rs;
             } catch (SQLException e) {
-                System.out.println("тут");
                 logger.error(e.getMessage());
             }
         }
@@ -131,7 +128,6 @@ public class UserDAO {
             }
         }
 
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
 
@@ -158,7 +154,6 @@ public class UserDAO {
     }
 
     public User getUserById(int userId) {
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -366,5 +361,17 @@ public class UserDAO {
             return userHardDeleted;
         }
         return false;
+    }
+
+    public void updateUserOrderLink(int userId, int orderId) throws SQLException {
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        if (connection != null) {
+            PreparedStatement statement = connection.prepareStatement(INSERT_USER_ORDER_LINK);
+            statement.setInt(1, userId);
+            statement.setInt(2, orderId);
+            statement.execute();
+            statement.close();
+        }
     }
 }

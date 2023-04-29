@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ page import="ru.tolstikhin.entity.RepairOrder"%>
-<%@ page import="ru.tolstikhin.entity.OrderHistory"%>
+         pageEncoding="UTF-8" %>
+<%@ page import="ru.tolstikhin.entity.RepairOrder" %>
+<%@ page import="ru.tolstikhin.entity.OrderHistory" %>
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -19,9 +19,18 @@
 <body>
 <header>
     <nav>
+        <a href="/">
+            <div class="site-logotype">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="48px">
+                    <rect x="2" y="2" width="26" height="44" rx="2" fill="none" stroke="black" stroke-width="4"/>
+                    <rect x="3" y="3" width="24" height="42" rx="2" fill="#ccc" stroke="none"/>
+                    <circle cx="14.5" cy="41" r="2" fill="black"/>
+                </svg>
+            </div>
+        </a>
         <ul>
             <li><a href="repair-status">Узнать статус ремонта</a></li>
-            <li><a href="about">О компании</a></li>
+            <li><a href="about">О нас</a></li>
             <li><a href="addresses">Адреса и контакты</a></li>
         </ul>
     </nav>
@@ -41,9 +50,11 @@
     %>
     <% if (order != null) { %>
     <h2>Информация о заказе</h2>
-    <p>Номер заказа: <%= order.getOrderNumber() %></p>
+    <p>Номер заказа: <%= order.getOrderNumber() %>
+    </p>
     <%--    <p>Описание проблемы: <%= order.getDescriptionProblem() %></p>--%>
-    <p>Текущий статус: <%= history.getLast().getRepairStatus().getName() %></p>
+    <p>Текущий статус: <%= history.getLast().getRepairStatus().getName() %>
+    </p>
     <h2>История заказа</h2>
     <table>
         <thead>
@@ -56,7 +67,8 @@
         <tbody>
         <% for (OrderHistory item : history) { %>
         <tr>
-            <td><%= item.getRepairStatus().getName() %></td>
+            <td><%= item.getRepairStatus().getName() %>
+            </td>
             <td><%
                 LocalDateTime startDatetime = item.getStartDatetime();
                 String formattedStartDatetime = startDatetime.format(formatter);
@@ -75,5 +87,10 @@
     </table>
     <% } %>
 </main>
+<footer>
+    <div id="footer">
+        <p>&copy; 2023 "ЭЛЕКТРОНИКУС"</p>
+    </div>
+</footer>
 </body>
 </html>

@@ -13,7 +13,6 @@ function showDropdown() {
                 // Добавляем обработчик событий на каждый элемент списка адресов
                 addressItem.addEventListener("click", function () {
                     const selectedAddress = addressItem.innerText;
-                    // const selectedAddress = addressItem.innerText;
                     // Меняем текст надписи на странице на выбранный адрес
                     const addressText = document.getElementById("address");
                     addressText.innerText = selectedAddress;

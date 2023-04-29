@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Личный кабинет</title>
+    <title>Личный кабинет администратора</title>
     <link rel="stylesheet" href="/css/main-style.css">
     <link rel="stylesheet" href="/css/admin-profile-style.css">
     <script src="/script/admin-script.js"></script>
@@ -14,9 +14,18 @@
 <body>
 <header>
     <nav>
+        <a href="/">
+            <div class="site-logotype">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="48px">
+                    <rect x="2" y="2" width="26" height="44" rx="2" fill="none" stroke="black" stroke-width="4"/>
+                    <rect x="3" y="3" width="24" height="42" rx="2" fill="#ccc" stroke="none"/>
+                    <circle cx="14.5" cy="41" r="2" fill="black"/>
+                </svg>
+            </div>
+        </a>
         <ul>
             <li><a href="repair-status">Узнать статус ремонта</a></li>
-            <li><a href="about">О компании</a></li>
+            <li><a href="about">О нас</a></li>
             <li><a href="addresses">Адреса и контакты</a></li>
         </ul>
     </nav>
@@ -58,7 +67,6 @@
                 <th>кол-во попыток ввода<br>пароля всего</th>
                 <th>последный вход</th>
                 <th>последний выход</th>
-
             </tr>
             </thead>
             <tbody>
@@ -122,21 +130,14 @@
         <input type="hidden" name="id-user-for-changing">
         <button type="submit">Сбросить текущие попытки</button>
     </form>
+    <div id="log_out_class">
+        <a href="logout">Выйти</a>
+    </div>
 </main>
-
-<div id="log_out_class">
-    <a href="logout">Выйти</a>
-</div>
-
-<%--<div id="popup">--%>
-<%--    <div id="popup-content">--%>
-<%--        <h2 id="inf">Информация</h2>--%>
-<%--        <p>Успешно</p>--%>
-<%--        <button id="close-popup">ОК</button>--%>
-<%--    </div>--%>
-<%--</div>--%>
-<%--<footer>--%>
-<%--    <p>&copy; 2023 My Company</p>--%>
-<%--</footer>--%>
+<footer>
+    <div id="footer">
+        <p>&copy; 2023 "ЭЛЕКТРОНИКУС"</p>
+    </div>
+</footer>
 </body>
 </html>
