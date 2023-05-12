@@ -49,6 +49,7 @@ button[type="submit"]:hover {
     cursor: pointer;
     width: 300px;
     max-width: 100%;
+    margin-bottom: 20px;
 }
 
 /* Стили для таблицы */
@@ -87,6 +88,10 @@ button[type="submit"]:hover {
     text-align: center;
     padding: 10px;
     border: 1px solid #ddd;
+}
+
+#user-management-container form {
+    width: 20%;
 }
 
 #users-management-ul {

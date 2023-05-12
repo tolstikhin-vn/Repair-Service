@@ -38,9 +38,9 @@ public class UserProfileServlet extends HttpServlet {
             // Если пользователь не аутентифицирован, перенаправляем его на страницу входа
             response.sendRedirect(request.getContextPath() + "/login");
         } else {
-            LinkedList<RepairOrder> ordersNumbers = orderDao.getOrdersForUser(((User) session.getAttribute("user")).getId());
-            if (ordersNumbers != null) {
-                request.setAttribute("ordersNumbers", ordersNumbers);
+            LinkedList<RepairOrder> orders = orderDao.getOrdersForUser(((User) session.getAttribute("user")).getId());
+            if (orders != null) {
+                request.setAttribute("ordersNumbers", orders);
             }
 
             // Если пользователь аутентифицирован, показываем страницу профиля

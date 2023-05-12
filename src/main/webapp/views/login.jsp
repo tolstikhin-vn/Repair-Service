@@ -29,16 +29,17 @@
     </div>
 </header>
 <main>
-    <h1>Login</h1>
-    <form action="login" method="post">
-        <label for="username">Логин:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Пароль:</label>
-        <input type="password" id="password" name="password" required><br>
-        <input type="submit" value="Login">
-    </form>
-    <p>Не зарегистрированы? <a href="registration">Зарегистрироваться</a></p>
-    <p>Забыли пароль? <a href="restore-password">Восстановить пароль</a></p>
+    <div class="input-user-data">
+        <h1>Вход</h1>
+        <form class="input-user-data-form" action="login" method="post" >
+            <label for="username">Логин:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Войти">
+        </form>
+        <p>Не зарегистрированы? <a href="registration">Регистрация</a></p>
+    </div>
 </main>
 <footer>
     <div id="footer">

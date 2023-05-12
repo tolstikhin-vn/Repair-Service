@@ -8,7 +8,7 @@
 <%@ page import="java.time.LocalDateTime" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 
-<% DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); %>
+<% DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"); %>
 
 <html>
 <head>
@@ -39,17 +39,19 @@
     </div>
 </header>
 <main>
-    <form action="repair-status" method="get">
-        <label for="repair-order">Номер заказа:</label>
-        <input type="text" id="repair-order" name="repair-order" required>
-        <input type="submit" value="Найти">
-    </form>
+    <div id="order-search-container">
+        <form action="repair-status" method="get">
+            <label for="repair-order">Номер заказа:</label>
+            <input type="text" id="repair-order" name="repair-order" required>
+            <input type="submit" value="Найти">
+        </form>
+    </div>
     <%
         RepairOrder order = (RepairOrder) request.getAttribute("order");
         LinkedList<OrderHistory> history = (LinkedList<OrderHistory>) request.getAttribute("history");
     %>
-    <% if (order != null) { %>
     <h2>Информация о заказе</h2>
+    <% if (order != null) { %>
     <p>Номер заказа: <%= order.getOrderNumber() %>
     </p>
     <%--    <p>Описание проблемы: <%= order.getDescriptionProblem() %></p>--%>
@@ -70,9 +72,11 @@
             <td><%= item.getRepairStatus().getName() %>
             </td>
             <td><%
-                LocalDateTime startDatetime = item.getStartDatetime();
-                String formattedStartDatetime = startDatetime.format(formatter);
-                out.print(formattedStartDatetime);
+                if (item.getStartDatetime() != null) {
+                    LocalDateTime startDatetime = item.getStartDatetime();
+                    String formattedStartDatetime = startDatetime.format(formatter);
+                    out.print(formattedStartDatetime);
+                }
             %></td>
             <td><%
                 if (item.getEndDatetime() != null) {

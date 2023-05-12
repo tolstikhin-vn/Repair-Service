@@ -6,12 +6,12 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-a {
+header a {
     text-decoration: none;
     color: inherit;
 }
 
-ul {
+header ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -37,26 +37,23 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*margin-right: 10px; !* добавить отступ для разделения соседних элементов *!*/
 }
 
 .site-logotype:hover {
     cursor: pointer;
 }
 
-nav {
+header nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /*flex: 1; !* добавить свойство flex *!*/
 }
 
-nav ul {
+header ul {
     display: flex;
-    /*flex: 1;*/
 }
 
-nav li {
+header li {
     margin: 0 10px;
 }
 
@@ -108,6 +105,30 @@ ul#dropdown-content li {
     cursor: pointer;
 }
 
+main {
+    margin-top: 30px;
+    padding-left: 20px;
+    margin-bottom: 70px;
+}
+
+#log_out {
+    margin-top: 40px;
+}
+
+#log_out a {
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+#log_out a:hover {
+    background-color: #c82333;
+}
+
 #footer {
     position: fixed;
     left: 0;
@@ -118,3 +139,80 @@ ul#dropdown-content li {
     text-align: center;
 }
 
+.input-user-data-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+input[type="submit"] {
+    background-color: #0077c2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="submit"]:hover {
+    background-color: #005ea6;
+}
+
+.input-user-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    text-align: center;
+    align-items: center;
+}
+
+.input-user-data label, .input-user-data input[type="submit"] {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.input-user-data input[type="text"], .input-user-data input[type="password"] {
+    width: 100%;
+}
+
+.input-user-data a {
+    color: blue;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.input-user-data a:visited {
+    color: purple;
+}
+
+#order-search-container {
+    width: 200px;
+}

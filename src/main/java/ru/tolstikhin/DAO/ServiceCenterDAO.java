@@ -21,7 +21,7 @@ public class ServiceCenterDAO {
     private SQLController sqlController = new SQLController();
 
     private String GET_CENTERS_BY_EMPLOYEE = "SELECT sc.id, sc.address FROM service_centers AS sc " +
-            "INNER JOIN employee_center_link AS ecl ON ecl.center_id = sc.id " +
+            "INNER JOIN employee_center_position_link AS ecl ON ecl.center_id = sc.id " +
             "WHERE ecl.user_id = ?";
 
     public ServiceCenterDAO(Connection connection) {

@@ -18,7 +18,7 @@ public class FeedbackServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int orderId = Integer.parseInt(request.getParameter("order-id"));
+        int orderId = Integer.parseInt(request.getParameter("orderId"));
         int rating = Integer.parseInt(request.getParameter("rating"));
         String feedbackText = request.getParameter("feedbackText");
 

@@ -38,18 +38,20 @@
     <div class="container">
         <h1>Управление пользователями</h1>
         <form method="get" action="users-list">
-            <label for="search-input">Поиск по логину:</label>
-            <input type="text" id="search-input" name="search" placeholder="Введите логин">
+            <label for="search-user">Поиск по логину:</label>
+            <input type="text" id="search-user" name="user" placeholder="Введите логин">
             <button type="submit">Найти</button>
         </form>
         <br>
         <label for="user-select">Выберите пользователя</label>
         <br>
-        <select id="user-select" name="user" onchange="getUserData(this.value)">
+        <select id="user-select" name="user" onchange="getUserData(this.value); document.getElementById('user-select').options[selectedIndex].click();">
             <option value="" selected>Пользователь не выбран</option>
             <% for (User user : (LinkedList<User>) request.getAttribute("users")) { %>
-            <option id="id-value" value="<%= user.getId() %>"><%= user.getLogin() %>
-                (<%= user.getName() %> <%= user.getSurname() %>)
+            <option id="id-value" value="<%= user.getId() %>" <%= (request.getAttribute("selectedUser") != null && user.getId() == (Integer)request.getAttribute("selectedUser")) ? "selected" : "" %>>
+            <% if (request.getAttribute("selectedUser") != null && user.getId() == (Integer)request.getAttribute("selectedUser")) { %>
+                <% } %>
+                <%= user.getLogin() %> (<%= user.getName() %> <%= user.getSurname() %>)
             </option>
             <% } %>
         </select>
@@ -86,51 +88,52 @@
         </table>
     </div>
 
-    <h2>Изменить пароль</h2>
-    <form method="post" action="change-password">
-        <%--        <label for="new-password-input">Изменить пароль</label>--%>
-        <input type="hidden" name="id-user-for-changing">
-        <input type="text" id="new-password-input" name="new-password" placeholder="Новый пароль">
-        <button type="submit" id="change-password-btn">Изменить</button>
-    </form>
-    <br>
+    <div id="user-management-container">
+        <h2>Изменить пароль</h2>
+        <form method="post" action="change-password">
+            <input type="hidden" name="id-user-for-changing">
+            <input type="text" id="new-password-input" name="new-password" placeholder="Новый пароль">
+            <button type="submit" id="change-password-btn">Изменить</button>
+        </form>
+        <br>
 
-    <h2>Заблокировать пользователя</h2>
-    <form method="post" action="user-ban">
-        <input type="hidden" name="id-user-for-changing">
-        <button type="submit">Заблокировать</button>
-    </form>
+        <h2>Заблокировать пользователя</h2>
+        <form method="post" action="user-ban">
+            <input type="hidden" name="id-user-for-changing">
+            <button type="submit">Заблокировать</button>
+        </form>
 
-    <h2>Разблокировать пользователя</h2>
-    <form method="post" action="user-unban">
-        <input type="hidden" name="id-user-for-changing">
-        <button type="submit">Разблокировать</button>
-    </form>
+        <h2>Разблокировать пользователя</h2>
+        <form method="post" action="user-unban">
+            <input type="hidden" name="id-user-for-changing">
+            <button type="submit">Разблокировать</button>
+        </form>
 
-    <h2>Поместить пользователя в архив</h2>
-    <form method="post" action="user-soft-del">
-        <input type="hidden" name="id-user-for-changing">
-        <button type="submit">Поместить в архив</button>
-    </form>
+        <h2>Поместить пользователя в архив</h2>
+        <form method="post" action="user-soft-del">
+            <input type="hidden" name="id-user-for-changing">
+            <button type="submit">Поместить в архив</button>
+        </form>
 
-    <h2>Убрать пользователя из архива</h2>
-    <form method="post" action="user-restore-soft-del">
-        <input type="hidden" name="id-user-for-changing">
-        <button type="submit">Убрать их архива</button>
-    </form>
+        <h2>Убрать пользователя из архива</h2>
+        <form method="post" action="user-restore-soft-del">
+            <input type="hidden" name="id-user-for-changing">
+            <button type="submit">Убрать из архива</button>
+        </form>
 
-    <h2>Удалить пользователя из системы</h2>
-    <form method="post" action="user-hard-del">
-        <input type="hidden" name="id-user-for-changing">
-        <button type="submit">Удалить пользователя</button>
-    </form>
+        <h2>Удалить пользователя из системы</h2>
+        <form method="post" action="user-hard-del">
+            <input type="hidden" name="id-user-for-changing">
+            <button type="submit">Удалить пользователя</button>
+        </form>
 
-    <h2>Сбросить текущее количество попыток входа в аккаунт</h2>
-    <form method="post" action="set-pass-fail-count-reset">
-        <input type="hidden" name="id-user-for-changing">
-        <button type="submit">Сбросить текущие попытки</button>
-    </form>
-    <div id="log_out_class">
+        <h2>Сбросить текущее количество попыток входа в аккаунт</h2>
+        <form method="post" action="set-pass-fail-count-reset">
+            <input type="hidden" name="id-user-for-changing">
+            <button type="submit">Сбросить текущие попытки</button>
+        </form>
+    </div>
+    <div id="log_out">
         <a href="logout">Выйти</a>
     </div>
 </main>

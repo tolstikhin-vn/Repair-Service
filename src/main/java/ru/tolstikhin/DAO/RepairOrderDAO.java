@@ -18,8 +18,12 @@ public class RepairOrderDAO {
     private final String GET_ORDERS_FOR_USER = "SELECT ro.id, ro.order_number, ro.completed, ro.rated FROM repair_orders AS ro " +
             "INNER JOIN users_orders_link AS uo ON uo.order_id = ro.id WHERE uo.user_id = ?";
 
-    private final String GET_ALL_ABOUT_ORDER = "SELECT ro.id,  ro.order_number, d.name, ro.device_name, ro.description_problem, ro.client_phone_number FROM repair_orders AS ro " +
-            "INNER JOIN devices AS d ON d.id = ro.id WHERE ro.order_number = ? ORDER BY id DESC";
+    private final String GET_ALL_ABOUT_ORDER = "SELECT ro.id,  ro.order_number, d.name, ro.device_name, oh.comment, ro.client_phone_number " +
+            "FROM repair_orders AS ro " +
+            "INNER JOIN devices_types AS d ON d.id = ro.id " +
+            "INNER JOIN order_history AS oh ON ro.id = oh.repair_order_id " +
+            "WHERE ro.order_number = ? AND oh.repair_status_id = 1 " +
+            "ORDER BY id DESC";
 
     private final String GET_ORDERS_FOR_CENTER = "SELECT ro.order_number, oh.start_datetime FROM repair_orders AS ro " +
             "INNER JOIN order_history AS oh ON ro.id = oh.repair_order_id " +
@@ -43,7 +47,7 @@ public class RepairOrderDAO {
                 order.setOrderNumber(rs.getString("order_number"));
                 order.setDeviceType(rs.getString("name"));
                 order.setDeviceName(rs.getString("device_name"));
-                order.setDescriptionProblem(rs.getString("description_problem"));
+                order.setDescriptionProblem(rs.getString("comment"));
                 order.setClientPhoneNumber(rs.getString("client_phone_number"));
                 return order;
             }
@@ -63,8 +67,10 @@ public class RepairOrderDAO {
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     RepairOrder order = new RepairOrder();
+                    order.setId(rs.getInt("id"));
                     order.setOrderNumber(rs.getString("order_number"));
-                    order.setStartDatetime(rs.getTimestamp("start_datetime").toLocalDateTime());
+                    order.setCompleted(rs.getBoolean("completed"));
+                    order.setRated(rs.getBoolean("rated"));
                     orders.add(order);
                 }
                 stmt.close();

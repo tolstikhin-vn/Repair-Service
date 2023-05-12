@@ -9,6 +9,7 @@ import ru.tolstikhin.DAO.UserDAO;
 import ru.tolstikhin.entity.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 @WebServlet("/users-list")
@@ -21,11 +22,22 @@ public class UsersListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
         LinkedList<User> users = userDAO.getUsers(); // получаем список пользователей из БД
 
         request.setAttribute("users", users); // передаем список пользователей на JSP страницу
+
+        String login = request.getParameter("user");
+        if (login != null) {
+            int userId;
+            try {
+                userId = userDAO.getIdByLogin(login);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if (userId != 0) {
+                request.setAttribute("selectedUser", userId);
+            }
+        }
         request.getRequestDispatcher("/views/admin-profile.jsp").forward(request, response); // перенаправляем на JSP страницу
     }
 

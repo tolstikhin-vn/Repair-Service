@@ -14,7 +14,7 @@ public class FeedbackDAO {
 
     private SQLController sqlController = new SQLController();
 
-    private String ADD_FEEDBACK = "SELECT add_feedback(?,?,?,?)";     // TODO ПЕРЕДЕЛАТЬ В ПРОЦЕДУРУ
+    private String ADD_FEEDBACK = "call add_feedback(?,?,?,?)";
 
     public FeedbackDAO() {
     }

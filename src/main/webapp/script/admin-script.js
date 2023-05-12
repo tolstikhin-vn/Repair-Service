@@ -1,5 +1,5 @@
 const userSelect = document.getElementById("user-select");
-const searchInput = document.getElementById("search-input");
+const searchInput = document.getElementById("search-user");
 const submitButton = document.querySelector("button[type=submit]");
 
 submitButton.addEventListener("click", (event) => {
@@ -64,7 +64,6 @@ function getUserData(userId) {
                 for (let i = 0; i < elements.length; i++) {
                     elements[i].value = id;
                 }
-                // document.querySelector('[name="id-user-for-changing"]').value = id
 
                 userIdCell.textContent = id;
                 userLoginCell.textContent = login;

@@ -1,5 +1,6 @@
 <%@ page import="java.util.LinkedList" %>
 <%@ page import="ru.tolstikhin.entity.RepairOrder" %>
+<%@ page import="ru.tolstikhin.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -36,10 +37,16 @@
     <div class="personal-data">
         <h2>Персональная информация</h2>
         <form method="post" action="save-data">
+            <%
+                // Получаем данные пользователя из сессии
+                String firstName = ((User) session.getAttribute("user")).getName();
+                String lastName = ((User) session.getAttribute("user")).getSurname();
+            %>
             <label for="first-name">Имя:</label>
-            <input type="text" id="first-name" name="first-name" required>
+            <input type="text" id="first-name" name="first-name" value="<%= firstName != null ? firstName : "" %>"
+                   required>
             <label for="last-name">Фамилия:</label>
-            <input type="text" id="last-name" name="last-name">
+            <input type="text" id="last-name" name="last-name" value="<%= lastName != null ? lastName : "" %>">
             <input type="submit" value="Сохранить">
         </form>
     </div>
@@ -54,12 +61,16 @@
                 for (RepairOrder order : orders) {
             %>
             <li>
-                <a href="repair-status?repair-order=<%= order.getOrderNumber() %>" class="order-number" data-order-number="<%= order.getOrderNumber() %>">
-                    <%= order.getOrderNumber() %>
-                </a>
-                <% if (order.isCompleted() && !order.isRated()) { %>
-                <a class="leave-feedback" data-order-id="<%= order.getId() %>">Оставить отзыв</a>
-                <% } %>
+                <div class="order-item">
+                    <a href="repair-status?repair-order=<%= order.getOrderNumber() %>" class="order-number"
+                       data-order-number="<%= order.getOrderNumber() %>">
+                        <%= order.getOrderNumber() %>
+                    </a>
+                    <% if (order.isCompleted() && !order.isRated()) { %>
+                    <canvas height="20px" width="50px" class="arrow-between">Обновите браузер</canvas>
+                    <a class="leave-feedback" data-order-id="<%= order.getId() %>">ОСТАВИТЬ ОТЗЫВ</a>
+                    <% } %>
+                </div>
             </li>
             <% } %>
         </ul>
@@ -68,12 +79,12 @@
     <div id="feedback-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Оставить отзыв о заказе></h2>
+            <h2>Оставить отзыв о заказе</h2>
             <form id="feedback-form" method="POST" action="/feedback">
-                <input type="hidden" name="orderId" value="order">
+                <input type="hidden" name="orderId" id="order-id" value="">
                 <label for="feedback-text">Отзыв:</label>
                 <textarea id="feedback-text" name="feedbackText" required></textarea>
-                <label for="rating">Оценка:</label>
+                <label for="rating">Оценка*:</label>
                 <select id="rating" name="rating" required>
                     <option value="">-- Выберите оценку --</option>
                     <option value="1">1</option>
@@ -82,34 +93,46 @@
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <input type="hidden" id="order-id" name="order-id" value="">
                 <input type="submit" value="Отправить">
             </form>
         </div>
     </div>
 
     <br>
-    <div id="log_out_class">
+    <div id="log_out">
         <a href="logout">Выйти</a>
     </div>
 </main>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // показываем диалоговое окно при клике на ссылку-кнопку
-        $('.leave-feedback').click(function(e) {
-            e.preventDefault();
-            var orderId = $(this).data('order-id');
-            $('#feedback-form input[name=orderId]').val(orderId);
+        $('.leave-feedback').click(function () {
+            const orderId = this.getAttribute('data-order-id');
             $('#order-id').val(orderId);
             $('#feedback-modal').show();
         });
 
         // закрываем диалоговое окно при клике на крестик или вне его
-        $('.close, #feedback-modal').click(function(e) {
+        $('.close, #feedback-modal').click(function (e) {
             if (e.target == $('#feedback-modal')[0] || e.target == $('.close')[0]) {
                 $('#feedback-modal').hide();
             }
         });
+    });
+
+    const canvases = document.querySelectorAll('canvas.arrow-between');
+    canvases.forEach(canvas => {
+        const ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        ctx.moveTo(0, 10);
+        ctx.lineTo(40, 10);
+        ctx.lineTo(40, 0);
+        ctx.lineTo(50, 10);
+        ctx.lineTo(40, 20);
+        ctx.lineTo(40, 10);
+        ctx.closePath();
+        ctx.fillStyle = "#000";
+        ctx.fill();
     });
 </script>
 <footer>

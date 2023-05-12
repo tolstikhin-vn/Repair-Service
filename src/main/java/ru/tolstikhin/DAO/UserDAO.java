@@ -21,13 +21,15 @@ public class UserDAO {
 
     private SQLController sqlController = new SQLController();
 
-    private final String SIGN_UP_QUERY = "select new_user(?, ?, NULL, NULL, NULL, NULL, NULL, NULL)";
+    private final String SIGN_UP_QUERY = "SELECT new_user(?, ?, NULL, NULL, NULL, NULL, NULL, NULL)";
 
     private final String LOG_IN_QUERY = "{? = call user_login(?, ?)}";
 
+    private final String LOG_OUT_QUERY = "SELECT user_logout(?)";
+
     private final String GET_MAIN_USER_ROLE = "{? = call get_main_user_role(?)}";
 
-    private final String UPDATE_USER_DATA = "select update_user_data(?, ?, ?)";
+    private final String UPDATE_USER_DATA = "SELECT update_user_data(?, ?, ?)";
 
     private final String GET_ID_BY_LOGIN = "SELECT u.id FROM users AS u WHERE u.login = ?";
 
@@ -53,7 +55,6 @@ public class UserDAO {
 
     public LinkedList<User> getUsers() {
         LinkedList<User> users = new LinkedList<>();
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -67,7 +68,6 @@ public class UserDAO {
                     user.setLogin(rs.getString("login"));
                     user.setName(rs.getString("name"));
                     user.setSurname(rs.getString("surname"));
-                    user.setUserRoleId(rs.getInt("id_role"));
                     // добавление пользователя в список
                     users.add(user);
                 }
@@ -82,7 +82,6 @@ public class UserDAO {
     }
 
     public ResultSet executeRegQuery(String log, String pass) {
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -101,8 +100,7 @@ public class UserDAO {
         return null;
     }
 
-    private int getIdByLogin(String login) throws SQLException {
-//        SQLController sqlController = new SQLController();
+    public int getIdByLogin(String login) throws SQLException {
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -134,8 +132,6 @@ public class UserDAO {
         if (connection != null) {
             try {
                 PreparedStatement statement = connection.prepareStatement(UPDATE_USER_DATA);
-                System.out.println(user.getLogin());
-                System.out.println(getIdByLogin(user.getLogin()));
                 statement.setInt(1, getIdByLogin(user.getLogin()));
                 statement.setString(2, name);
                 statement.setString(3, surname);
@@ -187,7 +183,6 @@ public class UserDAO {
     }
 
     public ResultSet getUserData(String login) {
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -203,7 +198,6 @@ public class UserDAO {
     }
 
     public String getMainUserRole(String login) {
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -222,7 +216,6 @@ public class UserDAO {
 
 
     public boolean logIn(String log, String pass) {
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         try {
@@ -240,8 +233,28 @@ public class UserDAO {
         return false;
     }
 
+    public boolean logOut(String log) {
+        // Проверяем наличие соединения
+        connection = sqlController.getConnection();
+        try {
+            if (connection != null) {
+                PreparedStatement stmt = connection.prepareStatement(LOG_OUT_QUERY);
+                stmt.setString(1, log);
+                ResultSet resultSet = stmt.executeQuery();
+                boolean isLogOut = false;
+                if (resultSet.next()) {
+                    isLogOut = resultSet.getBoolean(1);
+                }
+                stmt.close();
+                return isLogOut;
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+        return false;
+    }
+
     public boolean changePassword(int userId, String newPassword) throws SQLException {
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -260,7 +273,6 @@ public class UserDAO {
     }
 
     public boolean userBan(int userId) throws SQLException {
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {
@@ -278,7 +290,6 @@ public class UserDAO {
     }
 
     public boolean userUnban(int userId) throws SQLException {
-//        SQLController sqlController = new SQLController();
         // Проверяем наличие соединения
         connection = sqlController.getConnection();
         if (connection != null) {

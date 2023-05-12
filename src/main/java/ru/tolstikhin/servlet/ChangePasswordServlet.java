@@ -35,9 +35,6 @@ public class ChangePasswordServlet extends HttpServlet {
         try {
             if (userDAO.changePassword(userId, newPassword)) {
                 response.sendRedirect("/admin");
-//                request.getRequestDispatcher("/views/admin-profile.jsp").forward(request, response);
-            } else {
-                response.sendRedirect( "/admin");
             }
         } catch (SQLException e) {
             logger.error(e.getMessage());

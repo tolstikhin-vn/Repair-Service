@@ -84,7 +84,6 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void switchRole(String login, HttpServletResponse response) throws IOException {
-        System.out.println((userDAO.getMainUserRole(login)));
         switch (userDAO.getMainUserRole(login)) {
             case "Администратор":
                 response.sendRedirect("/admin");

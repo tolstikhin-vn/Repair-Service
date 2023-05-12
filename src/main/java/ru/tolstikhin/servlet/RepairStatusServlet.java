@@ -39,9 +39,9 @@ public class RepairStatusServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String orderNumber = request.getParameter("repair-order");
-        // получаем информацию о заказе из базы данных
-        RepairOrder order = orderDao.getByOrderNumber(orderNumber);
-        if (order != null) {
+        if (orderNumber != null) {
+            // получаем информацию о заказе из базы данных
+            RepairOrder order = orderDao.getByOrderNumber(orderNumber);
             // получаем историю заказа из базы данных
             List<OrderHistory> history = historyDao.getByOrderId(order.getId());
 
